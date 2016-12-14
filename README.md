@@ -1,33 +1,36 @@
 == README
+
+### TODOS
+
+* get rid of `paperclip` gem
+* add `aws-sdk` gem
+
 ### A quick hashing out of models
-  event -|< groups 0|< attendees
 
-  event:
-    [uuid] ?host
-    [int] max_groups_count (default/minimum = 1)
-    [int] min_groups_count (default/minimum = 1)
-    [datetime] date
-    [datetime] rsvp_by
-  group:
-    [uuid] event
-    [int] min_size
-    [int] max_size
-  (attendee):
-    !!! how to handle host's optional status as attendee? !!!
-    [uuid] group -> event
-    ??? [bool] should_remind
-    ??? [datetime] remind_at
+``` ruby
+class Photo
+  attr_accessor :filename, :s3_url, :height, :width
 
-* Ruby version 2.1.5
+  has_many :people, through: :appearances
+end
 
-* System dependencies
+class Person
+  attr_accessor :first_name, :last_name
 
-* Configuration
+  has_many :photos, through: :appearances
+end
+
+class Appearance
+  attr_accessor :in_focus
+
+  belongs_to :photo
+  belongs_to :person
+end
+```
+
+* Ruby version 2.3.1
 
 * Database: sqlite3 for dev & test, pg for prod
 
 * How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
+`bin/rspec` or on an ongoing basis with `guard`
