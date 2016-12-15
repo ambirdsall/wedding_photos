@@ -2,7 +2,6 @@
 
 ### TODOS
 
-* get rid of `paperclip` gem
 * add `aws-sdk` gem
 
 ### A quick hashing out of models
