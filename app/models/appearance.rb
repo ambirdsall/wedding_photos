@@ -13,4 +13,6 @@
 #
 
 class Appearance < ActiveRecord::Base
+  belongs_to :person
+  belongs_to :photo
 end
