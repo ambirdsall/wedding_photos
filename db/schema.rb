@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161214090319) do
+ActiveRecord::Schema.define(version: 20161216081720) do
 
   create_table "appearances", force: :cascade do |t|
     t.integer "person_id"
@@ -29,8 +29,9 @@ ActiveRecord::Schema.define(version: 20161214090319) do
   end
 
   create_table "photos", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.integer  "visibility_level"
   end
 
 end

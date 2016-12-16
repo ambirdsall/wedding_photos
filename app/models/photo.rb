@@ -2,9 +2,10 @@
 #
 # Table name: photos
 #
-#  id         :integer          not null, primary key
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id               :integer          not null, primary key
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  visibility_level :integer
 #
 
 class Photo < ActiveRecord::Base
