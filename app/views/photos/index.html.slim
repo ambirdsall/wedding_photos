@@ -8,9 +8,10 @@ table
       th
 
   tbody
-    - @photos.each do |photo|
+    - @photos.each_slice(2) do |pair|
       tr
-        td = link_to 'Show', photo
+        - pair.each do |photo|
+          td = link_to (image_tag photo.small), photo.medium
 
 br
 
