@@ -1,0 +1,16 @@
+h1 Listing photos
+
+table
+  thead
+    tr
+      th
+      th
+      th
+
+  tbody
+    - @photos.each do |photo|
+      tr
+        td = link_to 'Show', photo
+
+br
+
