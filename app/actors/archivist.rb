@@ -1,13 +1,12 @@
 class Archivist
-  ZIPFILE_NAME = 'PhotosFromAlexAndAudrey.zip'.freeze
+  ZIPFILE_NAME = 'PhotosFromAlexAndAudrey'.freeze
 
-  # filestream_writer :: ->(filename, stream) { stream.write data_for(filename) }
-  def initialize(filestream_writer)
-    @filestream_writer = filestream_writer
-  end
-
-  def zipping(filenames)
-    temp_file = Tempfile.new(ZIPFILE_NAME)
+  # Usage:
+  #   Archivist.new(foo).zipping(a_bunch_of_files, 'cool_folder') do |filename_dot_zip, zipped_data|
+  #     do_stuff_with_zip_file
+  #   end
+  def zipping(filenames, folder_name = ZIPFILE_NAME)
+    temp_file = Tempfile.new("#{folder_name}.zip")
 
     begin
       # First, initialize the temp file as a zip file
@@ -30,9 +29,13 @@ class Archivist
       # And hand the filename and archive data off to calling code
       yield(ZIPFILE_NAME, zipped_photos)
     ensure
-      # Close and delete the temp file
       temp_file.close
       temp_file.unlink
     end
+  end
+
+  # filestream_writer :: ->(filename, stream) { stream.write foo(filename) }
+  def initialize(filestream_writer)
+    @filestream_writer = filestream_writer
   end
 end
