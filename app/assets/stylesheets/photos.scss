@@ -1,12 +1,10 @@
-// Place all the styles related to the photos controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+$modal-padding-top: 80px;
 
 [id=modal] {
   display: none;
   position: fixed;
   z-index: 1;
-  padding-top: 100px;
+  padding-top: $modal-padding-top;
   left: 0;
   top: 0;
   width: 100%;
@@ -15,10 +13,8 @@
   background-color: rgb(0,0,0);
   background-color: rgba(0,0,0,0.9);
 }
-  [id=modal-close] {
+  [id=modal-close], [id=modal-next], [id=modal-previous] {
     position: absolute;
-    top: 15px;
-    right: 35px;
     color: #f1f1f1;
     font-size: 40px;
     font-weight: bold;
@@ -30,12 +26,31 @@
       cursor: pointer;
     }
   }
-
+  [id=modal-close] {
+    top: 15px;
+    right: 35px;
+  }
+    .modal-close__instruction {
+      font-size: 10px;
+      position: absolute;
+      top: 60px;
+      right: 37px;
+      color: #a1a1a1;
+      transition: 0.3s;
+    }
+  [id=modal-next] {
+    top: 50%;
+    right: 30px;
+  }
+  [id=modal-previous] {
+    top: 50%;
+    left: 30px;
+  }
   [id=modal-photo] {
     display: block;
     margin: auto;
     // width: 80%;
-    max-height: 90vh;
+    max-height: calc(90vh - #{$modal-padding-top});
     // max-width: 80vw;
     @media only screen and (max-width: 700px) {
       width: 100%;
@@ -72,3 +87,5 @@
   outline: 4px solid #af9e90;
   outline-offset: -4px;
 }
+
+// vim:foldmethod=marker:foldmarker={,}

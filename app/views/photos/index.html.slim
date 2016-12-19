@@ -1,7 +1,12 @@
 .row.gallery
   #modal
     span#modal-close &times;
+    span.modal-close__instruction
+      | [esc]
+
+    span#modal-previous &larr;
     img#modal-photo
+    span#modal-next &rarr;
 
   - first_two = @photos.first(2)
   - last_two  = @photos.last(2)

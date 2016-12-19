@@ -3,10 +3,12 @@ var state = {
 , prevPhotoId: ''
 , nextPhotoId: ''
 }
-var modal      = document.getElementById('modal')
-var modalImage = document.getElementById('modal-photo')
-var modalClose = document.getElementById('modal-close')
-var photos     = document.getElementsByClassName('js-photo')
+var modal          = document.getElementById('modal')
+var modalImage     = document.getElementById('modal-photo')
+var modalCloseBtn  = document.getElementById('modal-close')
+var modalNextBtn   = document.getElementById('modal-next')
+var modalPrevBtn   = document.getElementById('modal-previous')
+var photos         = document.getElementsByClassName('js-photo')
 var numberOfPhotos = photos.length
   , i
   , currentPhoto
@@ -24,7 +26,9 @@ for (i = 0; i < numberOfPhotos; i++) {
 
   currentPhoto.onclick = displaySelfAsModal
 }
-modalClose.onclick = dismissModal
+modalCloseBtn.onclick = dismissModal
+modalPrevBtn.onclick = displayPrevAsModal
+modalNextBtn.onclick = displayNextAsModal
 
 
 
