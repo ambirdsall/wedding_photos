@@ -1,5 +1,34 @@
 .row.gallery
+  #modal
+    span#modal-close &times;
+    img#modal-photo
   - @photos.each do |photo|
-    .col-lg-4.col-xs-6.thumb
-      / a.thumbnail href='#'
-      = link_to((image_tag photo.medium, class: 'img-responsive'), photo.full_size)
+    .col-lg-4.col-xs-6.thumb.h-photo
+      / = link_to((image_tag photo.medium, class: 'img-responsive'), photo.full_size)
+      = image_tag photo.medium, class: 'img-responsive js-photo'
+
+javascript:
+  var modal      = document.getElementById('modal')
+  var modalImage = document.getElementById('modal-photo')
+  var modalClose = document.getElementById('modal-close')
+  var photos     = document.getElementsByClassName('js-photo')
+
+  var numberOfPhotos = photos.length
+    , i
+    , currentPhoto
+
+  function displaySelfAsModal () {
+    modal.style.display = 'block'
+    modalImage.src = this.src
+    modalImage.alt = this.alt
+  }
+
+  for (i = 0; i < numberOfPhotos; i++) {
+    currentPhoto = photos[i]
+
+    currentPhoto.onclick = displaySelfAsModal
+  }
+
+  modalClose.onclick = function hideModal () {
+    modal.style.display = 'none'
+  }
