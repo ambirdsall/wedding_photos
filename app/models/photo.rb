@@ -12,6 +12,9 @@ class Photo < ActiveRecord::Base
   has_many :people, through: :appearances
   has_many :appearances
 
+  def thumbnail
+    s3_url_for_size 't'
+  end
   def small
     s3_url_for_size 's'
   end
