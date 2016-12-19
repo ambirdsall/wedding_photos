@@ -2,33 +2,22 @@
   #modal
     span#modal-close &times;
     img#modal-photo
-  - @photos.each do |photo|
+
+  - first_two = @photos.first(2)
+  - last_two  = @photos.last(2)
+
+  - first_photo       = first_two.first
+  - second_photo      = first_two.last
+  - penultimate_photo = last_two.first
+  - last_photo        = last_two.last
+
+  .col-lg-4.col-xs-6.thumb.h-photo
+    = image_tag first_photo.medium, id: "p#{first_photo.id}", class: 'img-responsive js-photo', data: { 'prevId' => "p#{last_photo.id}", 'nextId' => "p#{second_photo.id}" }
+  - @photos.each_cons(3) do |previous_photo, photo, next_photo|
     .col-lg-4.col-xs-6.thumb.h-photo
       / = link_to((image_tag photo.medium, class: 'img-responsive'), photo.full_size)
-      = image_tag photo.medium, class: 'img-responsive js-photo'
+      = image_tag photo.medium, id: "p#{photo.id}", class: 'img-responsive js-photo', data: { 'prevId' => "p#{previous_photo.id}", 'nextId' => "p#{next_photo.id}" }
+  .col-lg-4.col-xs-6.thumb.h-photo
+    = image_tag last_photo.medium, id: "p#{last_photo.id}", class: 'img-responsive js-photo', data: { 'prevId' => "p#{penultimate_photo.id}",'nextId' => "p#{@photos.first.id}" }
 
-javascript:
-  var modal      = document.getElementById('modal')
-  var modalImage = document.getElementById('modal-photo')
-  var modalClose = document.getElementById('modal-close')
-  var photos     = document.getElementsByClassName('js-photo')
-
-  var numberOfPhotos = photos.length
-    , i
-    , currentPhoto
-
-  function displaySelfAsModal () {
-    modal.style.display = 'block'
-    modalImage.src = this.src
-    modalImage.alt = this.alt
-  }
-
-  for (i = 0; i < numberOfPhotos; i++) {
-    currentPhoto = photos[i]
-
-    currentPhoto.onclick = displaySelfAsModal
-  }
-
-  modalClose.onclick = function hideModal () {
-    modal.style.display = 'none'
-  }
+script src="#{asset_path('photos.js')}"
