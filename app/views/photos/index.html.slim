@@ -11,13 +11,9 @@
   - penultimate_photo = last_two.first
   - last_photo        = last_two.last
 
-  .col-lg-4.col-xs-6.thumb.h-photo
-    = image_tag first_photo.medium, id: "p#{first_photo.id}", class: 'img-responsive js-photo', data: { 'prevId' => "p#{last_photo.id}", 'nextId' => "p#{second_photo.id}" }
+  = render partial: 'gallery_image', locals: { photo: first_photo, next_photo: second_photo, previous_photo: last_photo }
   - @photos.each_cons(3) do |previous_photo, photo, next_photo|
-    .col-lg-4.col-xs-6.thumb.h-photo
-      / = link_to((image_tag photo.medium, class: 'img-responsive'), photo.full_size)
-      = image_tag photo.medium, id: "p#{photo.id}", class: 'img-responsive js-photo', data: { 'prevId' => "p#{previous_photo.id}", 'nextId' => "p#{next_photo.id}" }
-  .col-lg-4.col-xs-6.thumb.h-photo
-    = image_tag last_photo.medium, id: "p#{last_photo.id}", class: 'img-responsive js-photo', data: { 'prevId' => "p#{penultimate_photo.id}",'nextId' => "p#{@photos.first.id}" }
+    = render partial: 'gallery_image', locals: { photo: photo, next_photo: next_photo, previous_photo: previous_photo }
+  = render partial: 'gallery_image', locals: { photo: last_photo, next_photo: first_photo, previous_photo: penultimate_photo }
 
 script src="#{asset_path('photos.js')}"

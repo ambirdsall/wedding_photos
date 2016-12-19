@@ -19,27 +19,44 @@ for (i = 0; i < numberOfPhotos; i++) {
 
   currentPhoto.onclick = displaySelfAsModal
 }
-modalClose.onclick = hideModal
+modalClose.onclick = dismissModal
 
 
 
 
-function hideModal () {
-  window.removeEventListener('keyup', handleKeyup)
+// Navigating to subsequent photos in the modal doesn't update the scroll position of
+// the window underneath the modal: instead, the window underneath stays
+// blithely focused on the same photo the user was looking at when they first
+// pulled up the modal view. Thus, before hiding the modal, we find the
+// position of the final photo loaded into the modal and scroll the window to
+// that position. That way, the user doesn't get "out of sync" with their
+// mental position in the photo list.
+function dismissModal () {
+  var photo = document.getElementById(state.photoId)
+
+  // scroll window to "focused" photo
+  window.scroll(0, scrollYPositionOf(photo))
+
+  // hide modal
   modal.style.display = 'none'
+
+  // clean up all modal navigation handlers
+  window.removeEventListener('keyup', handleKeyup)
+  mc.off('swiperight', displayNextAsModal)
+  mc.off('swipeleft', displayPrevAsModal)
 }
 
+// The entry point for the modal UI
 function displaySelfAsModal () {
+  setModalImageTo(this)
+
+  // unveil modal
   modal.style.display = 'block'
 
-  modalImage.src = this.src
-  modalImage.alt = this.alt
-
-  state.photoId     = this.id
-  state.prevPhotoId = this.dataset.previd
-  state.nextPhotoId = this.dataset.nextid
-
+  // set up navigation handlers
   window.addEventListener('keyup', handleKeyup)
+  mc.on('swiperight', displayPrevAsModal)
+  mc.on('swipeleft', displayNextAsModal)
 }
 
 function handleKeyup (event) {
@@ -53,7 +70,7 @@ function handleKeyup (event) {
       displayPrevAsModal()
       break
     case 'Escape':
-      hideModalAndScrollToPhoto()
+      dismissModal()
       break
     default:
       return
@@ -63,30 +80,22 @@ function handleKeyup (event) {
 function displayNextAsModal () {
   var nextImage = document.getElementById(state.nextPhotoId)
 
-  modalImage.src = nextImage.src
-  modalImage.alt = nextImage.alt
-
-  state.photoId     = nextImage.id
-  state.prevPhotoId = nextImage.dataset.previd
-  state.nextPhotoId = nextImage.dataset.nextid
+  setModalImageTo(nextImage)
 }
 
 function displayPrevAsModal () {
   var prevImage = document.getElementById(state.prevPhotoId)
 
-  modalImage.src = prevImage.src
-  modalImage.alt = prevImage.alt
-
-  state.photoId     = prevImage.id
-  state.prevPhotoId = prevImage.dataset.previd
-  state.nextPhotoId = prevImage.dataset.nextid
+  setModalImageTo(prevImage)
 }
 
-function hideModalAndScrollToPhoto () {
-  var photo = document.getElementById(state.photoId)
+function setModalImageTo (sourcePhoto) {
+  modalImage.src = sourcePhoto.src
+  modalImage.alt = sourcePhoto.alt
 
-  window.scroll(0, scrollYPositionOf(photo))
-  hideModal()
+  state.photoId     = sourcePhoto.id
+  state.prevPhotoId = sourcePhoto.dataset.previd
+  state.nextPhotoId = sourcePhoto.dataset.nextid
 }
 
 function scrollYPositionOf(el) {
