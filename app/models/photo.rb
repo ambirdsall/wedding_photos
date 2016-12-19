@@ -9,8 +9,8 @@
 #
 
 class Photo < ActiveRecord::Base
+  has_many :people, through: :appearances
   has_many :appearances
-  has_many :people, through: :appearance
 
   def small
     s3_url_for_size 's'

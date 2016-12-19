@@ -11,5 +11,5 @@
 
 class Person < ActiveRecord::Base
   has_many :appearances
-  has_many :photos, through: :appearance
+  has_many :photos, through: :appearances
 end
