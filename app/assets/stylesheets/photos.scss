@@ -1,3 +1,17 @@
 // Place all the styles related to the photos controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.gallery {
+  background: #858785;
+  background: linear-gradient( to bottom, #dbe8e8, #241915 );
+}
+// #241915
+// #858785
+// #a16b54
+// #97a44d
+// #e86d46
+// #af9e90
+// #dbe8e8
+
+.thumb.thumb { padding: 0; }

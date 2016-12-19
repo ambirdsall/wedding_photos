@@ -1,17 +1,5 @@
-h1 Listing photos
-
-table
-  thead
-    tr
-      th
-      th
-      th
-
-  tbody
-    - @photos.each_slice(2) do |pair|
-      tr
-        - pair.each do |photo|
-          td = link_to (image_tag photo.small), photo.medium
-
-br
-
+.row.gallery
+  - @photos.each do |photo|
+    .col-lg-4.col-xs-6.thumb
+      / a.thumbnail href='#'
+      = link_to((image_tag photo.medium, class: 'img-responsive'), photo.full_size)
