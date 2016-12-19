@@ -10,6 +10,11 @@ var photos     = document.getElementsByClassName('js-photo')
 var numberOfPhotos = photos.length
   , i
   , currentPhoto
+var mc = new Hammer.Manager(modalImage, {
+  recognizers: [
+    [Hammer.Swipe, { direction: Hammer.DIRECTION_HORIZONTAL }]
+  ]
+})
 
 
 

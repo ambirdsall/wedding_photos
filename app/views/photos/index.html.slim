@@ -16,4 +16,5 @@
     = render partial: 'gallery_image', locals: { photo: photo, next_photo: next_photo, previous_photo: previous_photo }
   = render partial: 'gallery_image', locals: { photo: last_photo, next_photo: first_photo, previous_photo: penultimate_photo }
 
+script src='http://hammerjs.github.io/dist/hammer.min.js'
 script src="#{asset_path('photos.js')}"
