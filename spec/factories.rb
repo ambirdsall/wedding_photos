@@ -3,8 +3,4 @@ FactoryGirl.define do
     first_name 'Carl'
     last_name 'Sagan'
   end
-
-  factory :photo do
-
-  end
 end

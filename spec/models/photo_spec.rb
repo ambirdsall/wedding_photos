@@ -10,5 +10,7 @@
 require 'rails_helper'
 
 RSpec.describe Photo, type: :model do
-  it { should have_and_belong_to_many :people }
+  describe 'associations' do
+    it { is_expected.to have_many(:people).through(:appearances) }
+  end
 end

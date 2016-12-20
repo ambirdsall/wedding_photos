@@ -12,7 +12,7 @@
 require 'rails_helper'
 
 RSpec.describe Person, type: :model do
-  describe 'basic-ass shit' do
-    it { should have_and_belong_to_many :photos }
+  describe 'associations' do
+    it { is_expected.to have_many(:photos).through(:appearances) }
   end
 end
