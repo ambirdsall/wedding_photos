@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
   root 'photos#index'
 
-  post '/photos', to: 'zip#photos', as: 'download'
+  post '/photos', to: 'zip#download', as: 'zip_download'
+  get '/dl/:id', to: 'photos#download', as: 'download'
 
   resources :people
-  resources :photos, only: [:index, :show]
+  resources :associations
 end

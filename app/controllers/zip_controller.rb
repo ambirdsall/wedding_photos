@@ -1,8 +1,9 @@
 class ZipController < ApplicationController
   # PARAMS
-  #   photo_ids :: [int]
+  #   photo_ids :: [FixNum]
   #   size :: :small | :medium | :full
-  def photos
+  #   folder_name :: String
+  def download
     paparazzo = PhotoFetcher.new(photo_ids: [112, 455], size: :medium)
     archie    = Archivist.new(paparazzo.filestream_writer)
 
