@@ -1,19 +1,18 @@
 class Archivist
-  ZIPFILE_NAME = 'PhotosFromAlexAndAudrey'.freeze
-
   # Usage:
   #   Archivist.new(foo).zipping(a_bunch_of_files, 'cool_folder') do |filename_dot_zip, zipped_data|
   #     do_stuff_with_zip_file
   #   end
-  def zipping(filenames, folder_name = ZIPFILE_NAME)
-    temp_file = Tempfile.new("#{folder_name}.zip")
+  def zipping(filenames, folder_name)
+    tempfile_name = "#{folder_name}.zip"
+    tempfile = Tempfile.new(tempfile_name)
 
     begin
       # First, initialize the temp file as a zip file
-      Zip::OutputStream.open(temp_file) { |zos| }
+      Zip::OutputStream.open(tempfile) { |zos| }
 
       # Now it can be filled with stuff and zipped
-      Zip::File.open(temp_file.path, Zip::File::CREATE) do |zip|
+      Zip::File.open(tempfile.path, Zip::File::CREATE) do |zip|
         filenames.each do |filename|
           # For each filename, write to a separate file in the archive of the same name
           zip.get_output_stream(filename) do |os|
@@ -24,13 +23,13 @@ class Archivist
       end
 
       #Read the binary data from the file
-      zipped_photos = File.read(temp_file.path)
+      zipped_photos = File.read(tempfile.path)
 
       # And hand the filename and archive data off to calling code
-      yield(ZIPFILE_NAME, zipped_photos)
+      yield(tempfile_name, zipped_photos)
     ensure
-      temp_file.close
-      temp_file.unlink
+      tempfile.close
+      tempfile.unlink
     end
   end
 
