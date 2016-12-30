@@ -1,2 +1,2 @@
 .col-lg-4.col-xs-6.thumb.h-photo
-  = image_tag photo.medium, id: "p#{photo.id}", class: 'img-responsive js-photo', data: { 'prevId' => "p#{previous_photo.id}", 'nextId' => "p#{next_photo.id}" }
+  = image_tag photo.medium, id: "#{photo.id}", class: 'img-responsive js-photo', data: { 'prevId' => "#{previous_photo.id}", 'nextId' => "#{next_photo.id}", 'thumbnail' => photo.thumbnail }
