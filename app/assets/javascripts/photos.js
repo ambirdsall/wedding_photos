@@ -166,12 +166,12 @@ var UI = {
   , hide: function () {//{{{
       this.el.style.display = 'none'
     }//}}}
-  , displayLoadingSpinner: function () {
+  , displayLoadingSpinner: function () {//{{{
       this.downloadBtn.innerHTML = this.loadingHTML
-    }
-  , hideLoadingSpinner: function () {
+    }//}}}
+  , hideLoadingSpinner: function () {//{{{
       this.downloadBtn.innerHTML = this.downloadHTML
-    }
+    }//}}}
   }//}}}
 , thumbnail: {//{{{
     overlayHTML: '<span class="selected-thumbnail__remove">&times;</span>'
