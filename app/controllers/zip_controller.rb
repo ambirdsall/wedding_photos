@@ -10,7 +10,7 @@ class ZipController < ApplicationController
 
     zipfile_name = params[:zip_filename] || DEFAULT_ZIPFILE_NAME
 
-    paparazzo = PhotoFetcher.new(photo_ids: selected_photos, size: :medium)
+    paparazzo = PhotoFetcher.new(photo_ids: selected_photos, size: :full)
     archie    = Archivist.new(PhotoFetcher::FILESTREAM_WRITER)
 
     archie.zipping(paparazzo.filenames, zipfile_name) do |filename, zipfile|
