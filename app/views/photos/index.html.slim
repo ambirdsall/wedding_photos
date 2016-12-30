@@ -1,18 +1,21 @@
 header#instructions
   h1.h2
     | To download a copy of any picture for normal digital use, 
-    span.hey click on photo to go to lightbox view
+    span.hey click on photo
     |  and then either click 
     span.hey-there Download
     |  or type 
     span.hey-there
-      | [Shift + Enter]
+      | [shift + enter]
     | .
   h2
     | If you want large, high-definition copies of any pictures to make prints
       from, click on 
-    span.hey-there Select full-res copy for download
-    |  in the lightbox view.
+    span.hey-there Select full-resolution for download
+    |  or type 
+    span.hey-there
+      | [alt + enter]
+    |  instead.
   h3
     |
       You can select as many full-res photos as you want and then download them
@@ -30,7 +33,9 @@ header#instructions
 footer#selected-photos
   #selected-photos__list
   #selected-photos__controls
-    button#download-zip-set.btn Download
+    button#download-zip-set.btn
+      span.glyphicon.glyphicon-floppy-save
+      |  Download album
 
 
 .row.gallery
@@ -51,7 +56,7 @@ footer#selected-photos
 
     a#modal-selection
       span.glyphicon.glyphicon-floppy-save.m-h-half-em
-      | Select full-res copy for download 
+      | Select full-resolution for download 
       span.keyboard-shortcut
         | [alt + enter]
 
