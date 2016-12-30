@@ -22,3 +22,4 @@ spec/last_run.rspec
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
+_static
