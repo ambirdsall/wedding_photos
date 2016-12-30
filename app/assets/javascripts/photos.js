@@ -126,7 +126,7 @@ var UI = {
   , prevBtn:      document.getElementById('modal-previous')
   , downloadBtn:  document.getElementById('modal-download')
   , selectionBtn: document.getElementById('modal-selection')
-  , selectBtnHTML:   '<span class="glyphicon glyphicon-cloud-download m-h-half-em"></span>Select full-res copy for download <span class="keyboard-shortcut">[shift + enter]</span>'
+  , selectBtnHTML:   '<span class="glyphicon glyphicon-floppy-save m-h-half-em"></span>Select full-resolution for download <span class="keyboard-shortcut">[shift + enter]</span>'
   , deselectBtnHTML: '<span class="glyphicon glyphicon-ok selection-check m-h-half-em"></span>Undo selection <span class="keyboard-shortcut">[shift + enter]</span>'
   , hide: function () {//{{{
       this.el.style.display = 'none'
