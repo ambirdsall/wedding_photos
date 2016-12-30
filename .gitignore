@@ -17,3 +17,8 @@ db/*.sqlite3
 /tmp
 doc/*
 spec/last_run.rspec
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
