@@ -231,16 +231,28 @@ body {
 [id=selected-photos__controls] {
   z-index: 2;
   width: 25%;
+  min-width: 350px;
   height: 100%;
 
   display: flex;
   align-items: center;
+  justify-content: space-around;
 
   box-shadow: -5px 0 4px -3px hsla(0, 0%, 0%, 0.3);
   border-left: 1px solid $selection-bg;
 }
-[id=download-zip-set] {
-  margin-left: 20px;
+#download-zip-set:hover {
+  background-color: #bbb;
+  color: hsla(69, 36%, 27%, 1);
+  border: 1px solid hsl(69, 36%, 47%);
+}
+#clear-thumbnails {
+  color: #444;
+  &:hover {
+    background-color: hsl(14, 78%, 59%);
+    color: hsl(14, 78%, 20%);
+    border: 1px solid hsl(14, 78%, 39%);
+  }
 }
 
 .thumb.thumb { padding: 0; }

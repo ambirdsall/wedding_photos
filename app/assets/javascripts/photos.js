@@ -152,6 +152,7 @@ var UI = {
 , thumbnailBar: {//{{{
     el: document.getElementById('selected-photos')
   , downloadBtn:  document.getElementById('download-zip-set')
+  , clearBtn:     document.getElementById('clear-thumbnails')
   , loadingHTML:  '<span class="glyphicon glyphicon-cog spin"></span> Zipping...'
   , downloadHTML: '<span class="glyphicon glyphicon-floppy-save"></span> Download album'
   , gallery: {//{{{
@@ -196,6 +197,7 @@ UI.modal.nextBtn.onclick      = displayNextAsModal
 UI.modal.selectionBtn.onclick = togglePhotoSelectedness
 
 UI.thumbnailBar.downloadBtn.onclick = downloadZipSet
+UI.thumbnailBar.clearBtn.onclick    = deselectAll
 //}}}
 function handleKeyup (event) {//{{{
   if (event.defaultPrevented) return
@@ -223,7 +225,7 @@ function togglePhotoSelectedness () {//{{{
   var photo = document.getElementById(state.photoId)
 
   if ( photo.dataset.selected ) {
-    deselectPhoto()
+    deselectPhoto(state.photoId)
   } else {
     selectPhoto()
   }
@@ -245,15 +247,15 @@ function selectPhoto () {//{{{ // unless already done: display thumbnailBar, dis
   // ensure photoId is in state.photoList
   state.photoList.addId(state.photoId)
 }//}}}
-function deselectPhoto (event) {//{{{
+function deselectPhoto (eventOrID) {//{{{
   var thumbnail
   var id
 
-  if ( event ) {
-    thumbnail = event.currentTarget
+  if ( eventOrID.currentTarget ) {
+    thumbnail = eventOrID.currentTarget
     id        = thumbnail.dataset.photoId
   } else {
-    id        = state.photoId
+    id        = eventOrID
     thumbnail = document.getElementById('t' + id)
   }
 
@@ -343,6 +345,9 @@ function downloadZipSet () {//{{{
 
   data.append('selected_photos', JSON.stringify(photoIds))
   request.send(data)
+}//}}}
+function deselectAll () {//{{{
+  state.photoList().forEach(function(id) { deselectPhoto(id) })
 }//}}}
 function dismissModal () {//{{{ // scrolls to last viewed image in gallery, removes handlers, hides modal
   scrollTo(document.getElementById(state.photoId))
