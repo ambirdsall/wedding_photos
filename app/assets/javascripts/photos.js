@@ -151,6 +151,7 @@ var UI = {
   }//}}}
 , thumbnailBar: {//{{{
     el: document.getElementById('selected-photos')
+  , controlPanel: document.querySelectorAll('#selected-photos__controls .btn')
   , downloadBtn:  document.getElementById('download-zip-set')
   , clearBtn:     document.getElementById('clear-thumbnails')
   , loadingHTML:  '<span class="glyphicon glyphicon-cog spin"></span> Zipping...'
@@ -162,10 +163,12 @@ var UI = {
       }//}}}
     }//}}}
   , reveal: function () {//{{{
-      this.el.style.display = 'flex'
+      this.el.style.height      = '70px'
+      this.controlPanel.forEach(function(el) { el.style.display = 'inline-block' })
     }//}}}
   , hide: function () {//{{{
-      this.el.style.display = 'none'
+      this.el.style.height      = '0'
+      this.controlPanel.forEach(function(el) { el.style.display = 'none' })
     }//}}}
   , displayLoadingSpinner: function () {//{{{
       this.downloadBtn.innerHTML = this.loadingHTML
