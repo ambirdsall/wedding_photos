@@ -152,6 +152,8 @@ var UI = {
 , thumbnailBar: {//{{{
     el: document.getElementById('selected-photos')
   , downloadBtn:  document.getElementById('download-zip-set')
+  , loadingHTML:  '<span class="glyphicon glyphicon-cog spin"></span> Zipping...'
+  , downloadHTML: '<span class="glyphicon glyphicon-floppy-save"></span> Download album'
   , gallery: {//{{{
       el: document.getElementById('selected-photos__list')
     , add: function (el) {//{{{
@@ -164,6 +166,12 @@ var UI = {
   , hide: function () {//{{{
       this.el.style.display = 'none'
     }//}}}
+  , displayLoadingSpinner: function () {
+      this.downloadBtn.innerHTML = this.loadingHTML
+    }
+  , hideLoadingSpinner: function () {
+      this.downloadBtn.innerHTML = this.downloadHTML
+    }
   }//}}}
 , thumbnail: {//{{{
     overlayHTML: '<span class="selected-thumbnail__remove">&times;</span>'
@@ -305,10 +313,13 @@ function downloadZipSet () {//{{{
   request.setRequestHeader('X-CSRF-Token', token)
   request.responseType = 'blob'
 
+  UI.thumbnailBar.displayLoadingSpinner()
   request.onload = function () {
     var blob
     var downloadLink
     var zipObjectURL
+
+    UI.thumbnailBar.hideLoadingSpinner()
 
     // Create a link element, hide it, direct it towards the blob, and then
     // click it programatically
