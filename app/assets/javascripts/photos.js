@@ -151,6 +151,7 @@ var UI = {
   }//}}}
 , thumbnailBar: {//{{{
     el: document.getElementById('selected-photos')
+  , downloadBtn:  document.getElementById('download-zip-set')
   , gallery: {//{{{
       el: document.getElementById('selected-photos__list')
     , add: function (el) {//{{{
@@ -175,19 +176,18 @@ var mc = new Hammer.Manager(UI.modal.image, {//{{{
   ]
 })//}}}
 // {{{ EVENT BINDING
-
-
 for (i = 0; i < numberOfPhotos; i++) {
   currentPhoto = photos[i]
 
   currentPhoto.onclick = displaySelfAsModal
 }
+
 UI.modal.closeBtn.onclick     = dismissModal
 UI.modal.prevBtn.onclick      = displayPrevAsModal
 UI.modal.nextBtn.onclick      = displayNextAsModal
 UI.modal.selectionBtn.onclick = togglePhotoSelectedness
 
-
+UI.thumbnailBar.downloadBtn.onclick = downloadZipSet
 //}}}
 function handleKeyup (event) {//{{{
   if (event.defaultPrevented) return
@@ -294,31 +294,44 @@ function downloadPhoto () {//{{{
   modalDownloadBtn.click()
 }//}}}
 function downloadZipSet () {//{{{
-//   var photoId = state.photoId
+  var photoIds = state.photoList()
+  var url      = 'photos'
+  var request  = new XMLHttpRequest()
+  var data     = new FormData()
+  var token    = document.querySelector('meta[name="csrf-token"]').content
 
-//   return new Promise(function(resolve, reject) {
-//     // Standard XHR to load an image
-//     var request = new XMLHttpRequest()
-//     request.open('GET', url)
-//     request.responseType = 'blob'
-//     // When the request loads, check whether it was successful
-//     request.onload = function() {
-//       if (request.status === 200) {
-//         // If successful, resolve the promise by passing back the request response
-//         resolve(request.response)
-//       } else {
-//         // If it fails, reject the promise with a error message
-//         reject(Error('Image didn\'t load successfully; error code:' + request.statusText))
-//       }
-//     }
-//     request.onerror = function() {
-//       // Also deal with the case when the entire request fails to begin with
-//       // This is probably a network error, so reject the promise with an appropriate message
-//       reject(Error('There was a network error.'))
-//     }
-//     // Send the request
-//     request.send()
-//   })
+  request.open('POST', url)
+
+  request.setRequestHeader('X-CSRF-Token', token)
+  request.responseType = 'blob'
+
+  request.onload = function () {
+    var blob
+    var downloadLink
+    var zipObjectURL
+
+    // Create a link element, hide it, direct it towards the blob, and then
+    // click it programatically
+    if (request.status === 200) {
+      blob = new Blob([this.response], {type: 'application/zip'})
+      zipObjectURL = window.URL.createObjectURL(blob)
+
+      downloadLink = document.createElement("a")
+      downloadLink.style.display = "none"
+      downloadLink.href = zipObjectURL
+      downloadLink.download = 'PhotosFromAlexAndAudrey.zip'
+
+      document.body.appendChild(downloadLink)
+      downloadLink.click()
+      window.URL.revokeObjectURL(zipObjectURL)
+    } else {
+      debugger
+    }
+  }
+  request.onerror = function () { debugger }
+
+  data.append('selected_photos', JSON.stringify(photoIds))
+  request.send(data)
 }//}}}
 function dismissModal () {//{{{ // scrolls to last viewed image in gallery, removes handlers, hides modal
   scrollTo(document.getElementById(state.photoId))

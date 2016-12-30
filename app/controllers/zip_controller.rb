@@ -6,7 +6,8 @@ class ZipController < ApplicationController
   #   size :: :small | :medium | :full
   #   folder_name :: String
   def download
-    selected_photos = params[:selected_photos]
+    selected_photos = JSON.parse params[:selected_photos]
+
     zipfile_name = params[:zip_filename] || DEFAULT_ZIPFILE_NAME
 
     paparazzo = PhotoFetcher.new(photo_ids: selected_photos, size: :medium)
