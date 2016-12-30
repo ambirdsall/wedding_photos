@@ -1,12 +1,59 @@
+header#instructions
+  h1.h2
+    | To download a copy of any picture for normal digital use, 
+    span.hey click on photo to go to lightbox view
+    |  and then either click 
+    span.hey-there Download
+    |  or type 
+    span.hey-there
+      | [Shift + Enter]
+    | .
+  h2
+    | If you want large, high-definition copies of any pictures to make prints
+      from, click on 
+    span.hey-there Select full-res copy for download
+    |  in the lightbox view.
+  h3
+    |
+      You can select as many full-res photos as you want and then download them
+      all, bundled into .zip files for faster downloads (the full-size versions
+      are rather large files, you see).
+
+  .h1
+    #down-arrow &darr;
+
+  javascript:
+    window.onload = () => {
+      console.log(`I should now run a subtle scroll wheel hint-type animation on #down-arrow, huh.`)
+    }
+
+footer#selected-photos
+  #selected-photos__list
+  #selected-photos__controls
+    button#download-zip-set.btn Download
+
+
 .row.gallery
   #modal
     span#modal-close &times;
-    span.modal-close__instruction
+    span.modal-close__instruction.keyboard-shortcut
       | [esc]
 
     span#modal-previous &larr;
     img#modal-photo
     span#modal-next &rarr;
+
+    a#modal-download download=true
+      span.glyphicon.glyphicon-cloud-download.m-h-half-em
+      | Download 
+      span.keyboard-shortcut
+        | [shift + enter]
+
+    a#modal-selection
+      span.glyphicon.glyphicon-floppy-save.m-h-half-em
+      | Select full-res copy for download 
+      span.keyboard-shortcut
+        | [alt + enter]
 
   - first_two = @photos.first(2)
   - last_two  = @photos.last(2)
@@ -21,5 +68,7 @@
     = render partial: 'gallery_image', locals: { photo: photo, next_photo: next_photo, previous_photo: previous_photo }
   = render partial: 'gallery_image', locals: { photo: last_photo, next_photo: first_photo, previous_photo: penultimate_photo }
 
-script src='http://hammerjs.github.io/dist/hammer.min.js'
+script src='https://hammerjs.github.io/dist/hammer.min.js'
+/ script src="js/hammer.min.js"
 script src="#{asset_path('photos.js')}"
+javascript:
