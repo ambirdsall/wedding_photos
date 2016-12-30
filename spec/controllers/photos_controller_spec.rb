@@ -7,8 +7,8 @@ RSpec.describe PhotosController, type: :controller do
   # PhotosController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
-  describe "GET #index" do
-    it "assigns all photos as @photos" do
+  describe 'GET #index' do
+    it 'assigns all photos as @photos' do
       all_photos = Photo.all
       expect(all_photos.length).to be(525)
 

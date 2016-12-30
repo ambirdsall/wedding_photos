@@ -1,6 +1,7 @@
 # Gets photos, in this case from S3
 class PhotoFetcher
   SIZES = {
+    thumb:  't',
     small:  's',
     medium: 'm',
     full:   ''
