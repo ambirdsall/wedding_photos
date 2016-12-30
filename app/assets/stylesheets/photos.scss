@@ -241,6 +241,9 @@ body {
 
   box-shadow: -5px 0 4px -3px hsla(0, 0%, 0%, 0.3);
   border-left: 1px solid $selection-bg;
+
+  // initial state
+  & .btn { display: none; }
 }
 #download-zip-set:hover {
   background-color: #bbb;
