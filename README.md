@@ -1,10 +1,17 @@
-== README
+# Alex and Audrey Birdsall wedding photos
+### a front-end photo gallery
+With a performant (it's just a linked list and vanilla js), keyboard-navigable
+modal view; and the ability to either download medium-resolution copies of any
+photo or select a set of photo ids and POST them to
+
+### a back-end file-zipping and -streaming endpoint
+which takes a list of photo ids, fetches the corresponding full-resolution
+photos from s3, and streams the data into a compressed archive for faster
+download.
 
 ### TODOS
 
-* add `aws-sdk` gem
-
-### A quick hashing out of models
+#### first
 
 ``` ruby
 class Photo
@@ -27,9 +34,20 @@ class Appearance
 end
 ```
 
-* Ruby version 2.3.1
+#### then
+* optimize download speed
+  I believe six open sockets per page is the standard, so particularly large zip
+  photosets would download fastest if split into up to 5 or 6 (TODO: verify) zip files for
+  parallel downloading.
+* unless it's terrible for the user
+  I mean, as a user, having to open a bunch of zip files and then collate them
+  all in whatever destination directory you wanted in your OS's GUI sounds like a
+  bigger nuisance than a long download.
 
-* Database: sqlite3 for dev & test, pg for prod
+#### then
+* Any subset of `photo.people` can be in focus except the empty set: at least
+  one person must be in focus.
+* Photos can be filtered by the people they contain, either by `first_name && last_name` or `last_name`
 
-* How to run the test suite
-`bin/rspec` or on an ongoing basis with `guard`
+## How to run the test suite
+`bin/rspec` or, better, `bin/guard`
