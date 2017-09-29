@@ -1,0 +1,143 @@
+/*
+
+
+ */
+
+/* line 3, /Users/ambirdsall/code/rails/wedding_photos/app/assets/stylesheets/photos.scss */
+[id=modal-close],
+[id=modal-next],
+[id=modal-previous], .modal-close__instruction, [id=modal-download] {
+  position: absolute;
+  color: #f1f1f1;
+  transition: 0.3s;
+}
+
+/* line 9, /Users/ambirdsall/code/rails/wedding_photos/app/assets/stylesheets/photos.scss */
+[id=modal-close]:hover,
+[id=modal-next]:hover,
+[id=modal-previous]:hover, [id=modal-download]:hover, [id=modal-close]:focus,
+[id=modal-next]:focus,
+[id=modal-previous]:focus, [id=modal-download]:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* line 16, /Users/ambirdsall/code/rails/wedding_photos/app/assets/stylesheets/photos.scss */
+[id=modal] {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  padding-top: 80px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: black;
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+/* line 29, /Users/ambirdsall/code/rails/wedding_photos/app/assets/stylesheets/photos.scss */
+[id=modal-close],
+[id=modal-next],
+[id=modal-previous] {
+  font-size: 40px;
+  font-weight: bold;
+}
+
+/* line 37, /Users/ambirdsall/code/rails/wedding_photos/app/assets/stylesheets/photos.scss */
+[id=modal-close] {
+  top: 15px;
+  right: 35px;
+}
+
+/* line 43, /Users/ambirdsall/code/rails/wedding_photos/app/assets/stylesheets/photos.scss */
+.modal-close__instruction {
+  font-size: 10px;
+  top: 60px;
+  right: 37px;
+  color: #a1a1a1;
+}
+
+/* line 50, /Users/ambirdsall/code/rails/wedding_photos/app/assets/stylesheets/photos.scss */
+[id=modal-next] {
+  top: 50%;
+  right: 30px;
+}
+
+/* line 56, /Users/ambirdsall/code/rails/wedding_photos/app/assets/stylesheets/photos.scss */
+[id=modal-previous] {
+  top: 50%;
+  left: 30px;
+}
+
+/* line 62, /Users/ambirdsall/code/rails/wedding_photos/app/assets/stylesheets/photos.scss */
+[id=modal-photo] {
+  display: block;
+  margin: auto;
+  max-height: calc(90vh - 80px);
+  -webkit-animation-name: zoom;
+  -webkit-animation-duration: 0.3s;
+  animation-name: zoom;
+  animation-duration: 0.3s;
+}
+@media only screen and (max-width: 700px) {
+  /* line 62, /Users/ambirdsall/code/rails/wedding_photos/app/assets/stylesheets/photos.scss */
+  [id=modal-photo] {
+    width: 100%;
+  }
+}
+
+/* line 76, /Users/ambirdsall/code/rails/wedding_photos/app/assets/stylesheets/photos.scss */
+[id=modal-download] {
+  top: 92%;
+  right: 45%;
+  right: calc(50% - 11.6em);
+  font-size: 15px;
+  color: #ddd;
+}
+
+@-webkit-keyframes zoom {
+  from {
+    -webkit-transform: scale(0);
+  }
+  to {
+    -webkit-transform: scale(1);
+  }
+}
+@keyframes zoom {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+/* line 94, /Users/ambirdsall/code/rails/wedding_photos/app/assets/stylesheets/photos.scss */
+.gallery {
+  background: #858785;
+  background: linear-gradient(to bottom, #dbe8e8, #241915);
+}
+
+/* line 106, /Users/ambirdsall/code/rails/wedding_photos/app/assets/stylesheets/photos.scss */
+.thumb.thumb {
+  padding: 0;
+}
+
+/* line 108, /Users/ambirdsall/code/rails/wedding_photos/app/assets/stylesheets/photos.scss */
+.h-photo:hover {
+  outline: 4px solid #af9e90;
+  outline-offset: -4px;
+}
+
+/* line 112, /Users/ambirdsall/code/rails/wedding_photos/app/assets/stylesheets/photos.scss */
+.m-h-half-em {
+  margin-left: 0.5em;
+  margin-right: 0.5em;
+}
+
+/* line 116, /Users/ambirdsall/code/rails/wedding_photos/app/assets/stylesheets/photos.scss */
+.bbb {
+  color: #bbb;
+}
